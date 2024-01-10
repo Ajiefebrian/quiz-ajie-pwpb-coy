@@ -1,6 +1,7 @@
 const d = document;
-let restoPay = d.getElementById("resto-pay").checked;
-let cash = d.getElementById("cash").checked;
+let restoPay = d.getElementById("resto-pay");
+let cash = d.getElementById("cash");
+
 let saldo = d.getElementById("saldo-resto-pay").value; // saldo resto pay
 console.log(localStorage.getItem("total"));
 const formatUang = (rupiah) => {
@@ -12,16 +13,32 @@ const formatUang = (rupiah) => {
 };
 let desc = localStorage.getItem("pesanan");
 let nama = localStorage.getItem("nama");
-info.innerHTML = `anda telah memesah ${nama}: ${desc}`;
+info.innerHTML = `anda telah memesan ${nama}: ${desc}`;
 let data = localStorage.getItem("total");
 let total = (document.getElementById("total").innerHTML = formatUang(
   parseInt(data)
 ));
-let saldo_u = 50000;
+let saldo_u = 5000000;
 
+const RestoPay = d.querySelector(".container-metode-pembayaran")
+const Cash = d.querySelector(".container-metode-Cash")
+
+let checkedResto = false;
+restoPay.addEventListener("click",()=>{
+  checkedResto = !checkedResto;
+  restoPay.checkedResto = checkedResto;
+})
+
+let checkedCash = false;
+Cash.addEventListener("click",()=>{
+  checkedCash = !checkedCash;
+  Cash.checked = checkedCash;
+})
 const saldo_user = (document.getElementById("saldo").innerHTML =
   formatUang(saldo_u));
 const bayar = () => {
+  let restoPay = d.getElementById("resto-pay").checked;
+let cash = d.getElementById("cash").checked;
   console.log(restoPay, cash);
   // Cek apakah memilih metode resto-pay
   if (!restoPay && !cash) {
